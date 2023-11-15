@@ -9,8 +9,7 @@ const morgan = require('morgan');
 const {startDatabase} = require('./database/mongo');
 const {insertAd, getAds} = require('./database/ads');
 const {deleteAd, updateAd} = require('./database/ads');
-const jwt = require('express-jwt');
-const jwksRsa = require('jwks-rsa');
+
 
 // defining the Express app
 const app = express();
@@ -36,22 +35,6 @@ app.use(morgan('combined'));
 app.get('/', async (req, res) => {
     res.send(await getAds());
   });
-
-  const checkJwt = jwt({
-    secret: jwksRsa.expressJwtSecret({
-      cache: true,
-      rateLimit: true,
-      jwksRequestsPerMinute: 5,
-      jwksUri: `https://dev-8ejo2jpb38zxjzmb.auth0.com/.well-known/jwks.json`
-    }),
-  
-    // Validate the audience and the issuer.
-    audience: 'https://ads-api',
-    issuer: `https://dev-8ejo2jpb38zxjzmb.auth0.com`,
-    algorithms: ['RS256']
-  });
-
-  app.use(checkJwt);
 
 app.post('/', async (req, res) => {
     const newAd = req.body;
