@@ -34,7 +34,7 @@ app.get('/', async (req, res) => {
     res.send(await getAds());
   });
 
-// start the in-memory MongoDB instance
+  // start the in-memory MongoDB instance
 startDatabase().then(async () => {
     await insertAd({title: 'Hello, now from the in-memory database!'});
   
@@ -43,3 +43,8 @@ startDatabase().then(async () => {
       console.log('listening on port 3001');
     });
   });
+
+// starting the server
+app.listen(3001, () => {
+  console.log('listening on port 3001');
+});
