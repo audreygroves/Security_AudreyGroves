@@ -43,8 +43,3 @@ startDatabase().then(async () => {
       console.log('listening on port 3001');
     });
   });
-
-// starting the server
-app.listen(3001, () => {
-  console.log('listening on port 3001');
-});
