@@ -54,6 +54,7 @@ const checkJwt = jwt.expressjwt({
 
 app.use(checkJwt);
 
+
 app.post('/', async (req, res) => {
     const newAd = req.body;
     await insertAd(newAd);
